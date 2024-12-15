@@ -12,11 +12,15 @@ const AdminStatistik = () => {
                         <i className="ri-user-line text-xl"></i>
                         <span>Manajemen Pengguna</span>
                     </Link>
-                    <Link to="/adminManajemen" className="flex items-center space-x-3">
+                    <Link to="/adminManajemenEdukasi" className="flex items-center space-x-3">
                         <i className="ri-file-list-line text-xl"></i>
                         <span>Manajemen Konten Edukasi</span>
                     </Link>
-                    <Link to="/adminStatistik" className="flex items-center space-x-3">
+                    <Link to="/adminManajemenTantangan" className="flex items-center space-x-3">
+                        <i className="ri-trophy-line text-xl"></i>
+                        <span>Manajemen Tantangan Harian</span>
+                    </Link>
+                    <Link to="/adminStatistik" className="flex items-center space-x-3 text-green-500 font-semibold">
                         <i className="ri-bar-chart-line text-xl"></i>
                         <span>Statistik Platform</span>
                     </Link>

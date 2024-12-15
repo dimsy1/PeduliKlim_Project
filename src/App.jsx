@@ -4,11 +4,12 @@ import RegisterPage from './pages/registerPage';
 import LandingPage from './pages/landingPage';
 import DashboardPage from './pages/dashboard';
 import TantanganPage from './pages/tantanganPage';
-import KomunitasPage from './pages/komunitasPage';
+import KomunitasPage from './pages/edukasiPage';
 import AkunPage from './pages/akunPage';
 import AdminDashboard from './pages/adminDashboard';
-import AdminManajemen from './pages/adminManajemen';
 import AdminStatistik from './pages/adminStatistik';
+import AdminManajemenTantangan from './pages/adminManajemenTantangan';
+import AdminManajemenEdukasi from './pages/adminManajemenEdukasi';
 
 function App() {
   return (
@@ -23,7 +24,8 @@ function App() {
         <Route path='/akun' element={<AkunPage />} />
 
         <Route path='/adminDashboard' element={<AdminDashboard />} />
-        <Route path='/adminManajemen' element={<AdminManajemen />} />
+        <Route path='/adminManajemenTantangan' element={<AdminManajemenTantangan />} />
+        <Route path='/adminManajemenEdukasi' element={<AdminManajemenEdukasi />} />
         <Route path='/adminStatistik' element={<AdminStatistik />} />
       </Routes>
     </Router>

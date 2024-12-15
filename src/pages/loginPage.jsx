@@ -1,49 +1,67 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Logo from '../components/Logo-PeduliKlim';
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setErrorMessage('');
+    setIsLoading(true);
 
-    // Logika sederhana untuk validasi (bisa ditambah sesuai kebutuhan)
-    if (username === 'user' && password === 'password') {
-        // Redirect ke dashboard jika login berhasil sebagai user
-        navigate('/dashboard');
-    } else if (username === 'admin' && password === 'password') {
-        // Redirect ke dashboard admin jika login berhasil sebagai admin
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/login', {
+        email,
+        password,
+      });
+
+      const { token, user } = response.data;
+
+      // Simpan token ke localStorage
+      localStorage.setItem('token', token);
+
+      // Simpan user role ke localStorage
+      localStorage.setItem('role', user.role);
+
+      // Arahkan berdasarkan role pengguna
+      if (user.role === 'admin') {
         navigate('/adminDashboard');
-    } else {
-        // Tampilkan alert jika username atau password salah
-        alert('Username atau password salah!');
+      } else {
+        navigate('/dashboard');
+      }
+    } catch (error) {
+      setIsLoading(false);
+      if (error.response && error.response.data.message) {
+        setErrorMessage(error.response.data.message);
+      } else {
+        setErrorMessage('Terjadi kesalahan pada server. Silakan coba lagi.');
+      }
     }
   };
 
-
   return (
     <div className="login-page h-screen">
-      {/* Logo */}
       <div className="header-logo absolute top-10 left-10 md:left-20">
         <Logo />
       </div>
 
       <div className="flex flex-col md:flex-row items-center bg-gradient-to-t from-green-100 to-white h-full">
-        {/* Sisi Kiri */}
         <div className="left-side w-full md:w-1/2 flex flex-col justify-center items-center h-full px-6 md:px-0">
           <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center">Masuk</h1>
-          {/* Login Form */}
           <form className="w-full md:w-1/2" onSubmit={handleLogin}>
-            <div className="username mb-4">
+            <div className="email mb-4">
               <input
-                type="text"
-                placeholder="Username"
+                type="email"
+                placeholder="Email"
                 className="w-full rounded-full p-3"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="password mb-4">
@@ -55,29 +73,30 @@ const LoginPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+            {errorMessage && <p className="text-red-500 text-sm mb-4">{errorMessage}</p>}
             <div className="submit-button">
               <button
                 type="submit"
-                className="w-full bg-green-500 text-white p-3 rounded-full hover:bg-green-600"
+                disabled={isLoading}
+                className={`w-full p-3 rounded-full ${
+                  isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-green-500 text-white hover:bg-green-600'
+                }`}
               >
-                Masuk
+                {isLoading ? 'Memproses...' : 'Masuk'}
               </button>
             </div>
           </form>
 
-          <div className='mt-8 text-center'>
-            <span className='text-gray-500'>Belum terdaftar?</span>
-            <a href='/register' className='underline text-blue-500 ml-2'>buat akun</a>
+          <div className="mt-8 text-center">
+            <span className="text-gray-500">Belum terdaftar?</span>
+            <a href="/register" className="underline text-blue-500 ml-2">
+              buat akun
+            </a>
           </div>
         </div>
 
-        {/* Sisi Kanan */}
         <div className="hidden md:flex bg-green-100 items-center justify-center w-full md:w-1/2 h-full">
-          <img
-            src="src/assets/login-illustration.png"
-            alt="Login Illustration"
-            className="w-3/4 h-auto"
-          />
+          <img src="src/assets/login-illustration.png" alt="Login Illustration" className="w-3/4 h-auto" />
         </div>
       </div>
     </div>
