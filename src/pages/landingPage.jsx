@@ -54,7 +54,7 @@ function LandingPage() {
             </p>
           </div>
           <div className="illustration">
-            <img src="src/assets/TeksUtama.png" alt="Hero Illustration" className="w-full" />
+            <img src="assets/TeksUtama.png" alt="Hero Illustration" className="w-full" />
           </div>
         </div>
 
@@ -77,14 +77,14 @@ function LandingPage() {
               </p>
             </div>
             <div className="desire-illustration">
-              <img src="src/assets/Forest-rafiki.png" alt="Desire Illustration" className="w-full" />
+              <img src="assets/Forest-rafiki.png" alt="Desire Illustration" className="w-full" />
             </div>
           </section>
 
           {/* Interest */}
           <section className="interest text-center md:text-left grid grid-cols-1 md:grid-cols-2 items-center gap-8">
             <div className="interest-illustration">
-              <img src="src/assets/TeksInfo.png" alt="Interest Illustration" className="w-full" />
+              <img src="assets/TeksInfo.png" alt="Interest Illustration" className="w-full" />
             </div>
             <div className="interest-text">
               <h2 className="text-3xl font-bold text-green-500 mb-4">Pelajari Cara Mengurangi Jejak Karbon Anda</h2>
