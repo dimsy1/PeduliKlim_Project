@@ -1,9 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../components/Logo-PeduliKlim";
 import Footer from "../components/Footer";
 
 function LandingPage() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+
+    // Hanya redirect jika token valid
+    if (token && role) {
+      if (role === "admin") {
+        navigate("/adminDashboard", { replace: true });
+      } else {
+        navigate("/dashboard", { replace: true });
+      }
+    }
+  }, [navigate]);
+
   return (
     <div className="landing-page min-h-screen flex flex-col">
       {/* Header */}
@@ -13,10 +29,10 @@ function LandingPage() {
 
         {/* Login & Register Button */}
         <div className="flex gap-2 items-center">
-          <Link to='/login' className="px-6 py-2 text-gray-900 border border-gray-900 rounded-full hover:bg-gray-900 hover:text-white transition">
+          <Link to="/login" className="px-6 py-2 text-gray-900 border border-gray-900 rounded-full hover:bg-gray-900 hover:text-white transition">
             Masuk
           </Link>
-          <Link to='/register' className="px-6 py-2 text-white bg-green-500 rounded-full hover:bg-green-600 transition">
+          <Link to="/register" className="px-6 py-2 text-white bg-green-500 rounded-full hover:bg-green-600 transition">
             Daftar
           </Link>
         </div>

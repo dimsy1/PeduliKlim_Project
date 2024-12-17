@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Logo from '../components/Logo-PeduliKlim';
@@ -10,38 +10,56 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  // Redirect jika user sudah login
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const role = localStorage.getItem('role');
+    if (token) {
+      if (role === 'admin') {
+        navigate('/adminDashboard', { replace: true });
+      } else {
+        navigate('/dashboard', { replace: true });
+      }
+    }
+  }, [navigate]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    // Validasi frontend
+    if (!email || !password) {
+      setErrorMessage('Email dan password harus diisi.');
+      return;
+    }
+
     setErrorMessage('');
     setIsLoading(true);
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/login', {
-        email,
-        password,
-      });
+      const response = await axios.post('http://127.0.0.1:8000/api/login', { email, password });
 
       const { token, user } = response.data;
 
-      // Simpan token ke localStorage
-      localStorage.setItem('token', token);
+      if (token && user) {
+        // Simpan token dan role ke localStorage
+        localStorage.setItem('token', token);
+        localStorage.setItem('role', user.role);
 
-      // Simpan user role ke localStorage
-      localStorage.setItem('role', user.role);
-
-      // Arahkan berdasarkan role pengguna
-      if (user.role === 'admin') {
-        navigate('/adminDashboard');
+        // Arahkan berdasarkan role pengguna
+        if (user.role === 'admin') {
+          navigate('/adminDashboard', { replace: true });
+        } else {
+          navigate('/dashboard', { replace: true });
+        }
       } else {
-        navigate('/dashboard');
+        setErrorMessage('Gagal mendapatkan informasi pengguna.');
       }
     } catch (error) {
+      setErrorMessage(
+        error.response?.data?.message || 'Terjadi kesalahan pada server. Silakan coba lagi.'
+      );
+    } finally {
       setIsLoading(false);
-      if (error.response && error.response.data.message) {
-        setErrorMessage(error.response.data.message);
-      } else {
-        setErrorMessage('Terjadi kesalahan pada server. Silakan coba lagi.');
-      }
     }
   };
 

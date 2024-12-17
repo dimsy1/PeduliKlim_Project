@@ -168,6 +168,14 @@ const AdminManajemenEdukasi = () => {
             <i className="ri-trophy-line text-xl"></i>
             <span>Manajemen Tantangan Harian</span>
           </Link>
+          <Link 
+            to="/adminValidasiTantangan" 
+            className="flex items-center space-x-3"
+            onClick={() => setShowSidebar(false)}
+          >
+              <i className="ri-check-line text-xl"></i>
+              <span>Validasi Tantangan</span>
+          </Link>
         </nav>
         <button onClick={handleLogout} className="mt-8 text-red-600 flex items-center space-x-2 w-full">
           <i className="ri-logout-box-r-line text-xl"></i>

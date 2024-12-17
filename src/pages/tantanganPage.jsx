@@ -42,10 +42,10 @@ const TantanganPage = () => {
                 transition-transform duration-300 ease-in-out
                 ${showSidebar ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
             >
-                <div className="logo-sidebar my-8 p-0 w-full flex items-center justify-center lg:justify-start">
+                <div className="logo-sidebar my-8 px-6 w-full flex items-center justify-center lg:justify-start">
                     <Logo />
                 </div>
-                <nav className="flex flex-col space-y-6 text-gray-600 w-full">
+                <nav className="flex flex-col space-y-6 px-6 text-gray-600 w-full">
                     <Link to="/dashboard" className="flex items-center space-x-3" onClick={() => setShowSidebar(false)}>
                         <i className="ri-home-line text-xl"></i>
                         <span>Beranda</span>
@@ -63,7 +63,7 @@ const TantanganPage = () => {
                         <span>Akun</span>
                     </Link>
                 </nav>
-                <button className="mt-8 text-red-600 flex items-center space-x-2 w-full" onClick={() => setShowSidebar(false)}>
+                <button className="mt-8 text-red-600 flex items-center space-x-2 w-full px-6" onClick={() => setShowSidebar(false)}>
                     <i className="ri-logout-box-r-line text-xl"></i>
                     <span>Logout</span>
                 </button>

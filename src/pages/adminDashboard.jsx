@@ -158,6 +158,14 @@ const AdminDashboard = () => {
                   <i className="ri-trophy-line text-xl"></i>
                   <span>Manajemen Tantangan Harian</span>
               </Link>
+              <Link 
+                to="/adminValidasiTantangan" 
+                className="flex items-center space-x-3"
+                onClick={() => setShowSidebar(false)}
+              >
+                  <i className="ri-check-line text-xl"></i>
+                  <span>Validasi Tantangan</span>
+              </Link>
           </nav>
           <button 
             onClick={handleLogout} 

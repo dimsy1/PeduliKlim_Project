@@ -57,10 +57,10 @@ const KomunitasPage = () => {
                 transition-transform duration-300 ease-in-out
                 ${showSidebar ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}
             >
-                <div className="logo-sidebar my-8 p-0 w-full flex items-center justify-center md:justify-start">
+                <div className="logo-sidebar my-8 px-6 w-full flex items-center justify-center md:justify-start">
                     <Logo />
                 </div>
-                <nav className="flex flex-col space-y-6 text-gray-600 w-full">
+                <nav className="flex flex-col space-y-6 px-6 text-gray-600 w-full">
                     <Link to="/dashboard" className="flex items-center space-x-3" onClick={() => setShowSidebar(false)}>
                         <i className="ri-home-line text-xl"></i>
                         <span>Beranda</span>
@@ -69,7 +69,7 @@ const KomunitasPage = () => {
                         <i className="ri-trophy-line text-xl"></i>
                         <span>Tantangan</span>
                     </Link>
-                    <Link to="/komunitas" className="flex items-center space-x-3 text-green-500" onClick={() => setShowSidebar(false)}>
+                    <Link to="/komunitas" className="flex items-center space-x-3 text-green-500 font-semibold" onClick={() => setShowSidebar(false)}>
                         <i className="ri-team-line text-xl"></i>
                         <span>Edukasi</span>
                     </Link>
@@ -78,7 +78,7 @@ const KomunitasPage = () => {
                         <span>Akun</span>
                     </Link>
                 </nav>
-                <button onClick={handleLogout} className="mt-8 text-red-600 flex items-center space-x-2 w-full">
+                <button onClick={handleLogout} className="mt-8 px-6 text-red-600 flex items-center space-x-2 w-full">
                     <i className="ri-logout-box-r-line text-xl"></i>
                     <span>Logout</span>
                 </button>
@@ -91,6 +91,7 @@ const KomunitasPage = () => {
                     <i className="ri-close-line text-2xl"></i>
                 </button>
             </aside>
+
 
             {/* Main Content Wrapper */}
             <div className="flex-1 flex flex-col">
@@ -106,7 +107,6 @@ const KomunitasPage = () => {
                 </header>
 
                 {/* Scrollable Main Section */}
-                {/* Pada layar kecil gunakan p-4, pada layar besar gunakan p-8 dan jika perlu kurangi px agar lebih pas di layar kecil */}
                 <main className="py-4 px-4 md:py-8 md:px-64 overflow-y-auto">
                     {loading ? (
                         <p>Memuat data konten edukasi...</p>
@@ -131,12 +131,12 @@ const KomunitasPage = () => {
                                     {/* Konten Teks di Sisi Kanan */}
                                     <div className="flex flex-col flex-grow">
                                         <h3 className="text-lg md:text-xl font-semibold mb-2">{konten.judul}</h3>
-                                        <p className="text-gray-500 text-sm mb-4">{konten.isi_konten}</p>
-                                        <div className="flex justify-end mt-auto">
+                                        <p className="text-gray-500 text-base mb-4">{konten.isi_konten}</p>
+                                        {/* <div className="flex justify-end mt-auto">
                                             <button className="bg-green-500 text-white px-4 py-2 rounded text-sm md:text-base">
                                                 Lihat Selengkapnya
                                             </button>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             ))}
