@@ -114,7 +114,7 @@ const LoginPage = () => {
         </div>
 
         <div className="hidden md:flex bg-green-100 items-center justify-center w-full md:w-1/2 h-full">
-          <img src="src/assets/login-illustration.png" alt="Login Illustration" className="w-3/4 h-auto" />
+          <img src="assets/login-illustration.png" alt="Login Illustration" className="w-3/4 h-auto" />
         </div>
       </div>
     </div>

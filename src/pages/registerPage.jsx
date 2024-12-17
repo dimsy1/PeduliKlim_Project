@@ -113,7 +113,7 @@ const RegisterPage = () => {
         {/* Sisi Kanan */}
         <div className="hidden md:flex bg-green-100 items-center justify-center w-full md:w-1/2 h-full">
           <img
-            src="src/assets/register-illustration.png"
+            src="assets/register-illustration.png"
             alt="Register Illustration"
             className="w-3/4 h-auto"
           />
